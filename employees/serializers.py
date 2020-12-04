@@ -7,4 +7,4 @@ class employeeSerializer(serializers.ModelSerializer):
     class Meta():
         model=employee
        # fields='all' fields = ('request_id', 'last_seed', 'available_flights')
-        fields=('first_name','last_name','employees_id')
+        fields=('first_name','last_name','employee_id','challenge','done','working','quality_check')

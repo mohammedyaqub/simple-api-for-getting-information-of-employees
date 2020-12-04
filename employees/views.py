@@ -17,14 +17,27 @@ def get_queryset(self):
  #   return HttpResponse("this is the main portal soaron")
 
 class List_Employees(APIView):#inherited from APIView
-    def get(self,request):
+    def get(self,request,format=None):
         #all_users=self.employee.objects.all() error bad waay using
         all_users=employee.objects.all()
         serializer=employeeSerializer(all_users,many=True)#which means returning all users
         #return HttpResponse
         return Response(serializer.data)# as we  going with endpoint using json for parsing the data 
 
-    def post(self):
-        pass 
+    def post(self, request, format=None):
+        serializer = employeeSerializer(data=request.data)
+        #data={}
+        if serializer.is_valid():
+            serializer.save()
+            #data['success']="new user have been created"
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def put(self):
+        pass
+    def delete(self):
+        pass
+    def update(self):
+        pass
 
 
